@@ -1,30 +1,42 @@
-import React from 'react'
+import React, { Children } from 'react'
 import ReactDom from 'react-dom';
 import './index.css';
 //setup vars
 
-const firstBook = {
+const books =[
+{
   img: 'https://upload.wikimedia.org/wikipedia/en/0/0c/MeTalkPrettyOneDayCover.JPG',
-  title: 'me talk pretty one day',
-  author: 'david sedaris'
+  title: 'Me Talk Pretty One Day',
+  author: 'David Sedaris'
+},
+{
+  img: 'https://upload.wikimedia.org/wikipedia/en/c/c3/Marquis_de_Sade_-_The_120_Days_of_Sodom.jpeg',
+  title: '100 Days of Sodom',
+  author: 'Marquis de Sade'
 }
+]
+
 
 function BookList() {
   return ( 
   <section className="booklist">
-    <Book img={firstBook.img} title={firstBook.title} author={firstBook.author}/>
-    <Book number={22}/>
-    <Book />
-    <Book />
+    {books.map((book)=> {
+      const { img, title, author } = book;
+      return (
+      <Book book={book}></Book>
+        );
+    })}
   </section>
     );
   }
 
 const Book = (props) => {
-  return (<article className="book">
-    <img src={props.img} alt='' />
-    <h1>{props.title}</h1>
-    <h4>{props.author}</h4>
+  const { img, title, author } = props.book;
+  return (
+  <article className="book">
+    <img src={img} alt='' />
+    <h1>{title}</h1>
+    <h4>{author}</h4>
   </article>
   );
 };
